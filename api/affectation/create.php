@@ -6,23 +6,23 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
     include_once '../../config/database.php';
-    include_once '../../modal/specialite.php';
+    include_once '../../modal/affectation.php';
 
     $database = new Database();
     $db = $database->getConnection();
 
-    $item = new Specialite($db);
+    $item = new Affectation($db);
 
     $data = json_decode(file_get_contents("php://input"));
 
-    $item->nom = $data->nom;
-    $item->filiere = $data->filiere;
-    $item->code = $data->code;
+    $item->id_module= $data->id_module;
+    $item->id_enseignant = $data->id_enseignant;
     
-   
+
+     
     
     
-    if($item->createSpecialite()){
+    if($item->createAffectation()){
         echo 'Employee created successfully.';
     } else{
         echo 'Employee could not be created.';

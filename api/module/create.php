@@ -6,23 +6,31 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
     include_once '../../config/database.php';
-    include_once '../../modal/specialite.php';
+    include_once '../../modal/module.php';
 
     $database = new Database();
     $db = $database->getConnection();
 
-    $item = new Specialite($db);
+    $item = new Module($db);
 
     $data = json_decode(file_get_contents("php://input"));
 
-    $item->nom = $data->nom;
-    $item->filiere = $data->filiere;
-    $item->code = $data->code;
+    $item->nom= $data->nom;
+    $item->id_specialite = $data->id_specialite;
     
-   
+    $item->semestre= $data->semestre;
+    $item->coefficient = $data->coefficient;
+    $item->credit = $data->credit;
     
     
-    if($item->createSpecialite()){
+
+    // echo $data->nom;
+    // echo $data->id_specialite;
+    // echo $data->semestre;
+    // echo $data->coefficient;
+    // echo $data->credit;
+    
+    if($item->createModule()){
         echo 'Employee created successfully.';
     } else{
         echo 'Employee could not be created.';
