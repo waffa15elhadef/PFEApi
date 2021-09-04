@@ -3,40 +3,36 @@
     header("Content-Type: application/json; charset=UTF-8");
     
     include_once '../../config/database.php';
-    include_once '../../modal/module.php';
+    include_once '../../modal/chapitre.php';
 
     
     $database = new Database();
     $db = $database->getConnection();
     
-    $item = new Module($db);
+    $item = new chapitre($db);
 
 
-    $stmt = $item->getModules();
+    $stmt = $item->getChapitres();
     $itemCount = $stmt->rowCount();
 
 
 
     if($itemCount > 0){
         
-        $modules = array();
-        $modules = array();
+        $chapitres = array();
+        $chapitres = array();
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             extract($row);
             $e = array(
+                "id_chapitre" => $id_chapitre,
                 "id_module" => $id_module,
-                "id_specialite" => $id_specialite,
-                "intitule" => $intitule,
-                "semestre" => $semestre,
-                "coefficient" => $coefficient,
-                "credit" => $credit
-                
+                "nom" => $nom
             );
 
-            array_push($modules, $e);
+            array_push($chapitres, $e);
         }
-        echo json_encode($modules);
+        echo json_encode($chapitres);
     }
 
     else{

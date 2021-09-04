@@ -1,33 +1,30 @@
 <?php
     header("Access-Control-Allow-Origin: *");
     header("Content-Type: application/json; charset=UTF-8");
-    header("Access-Control-Allow-Methods: *");
+    header("Access-Control-Allow-Methods: POST");
     header("Access-Control-Max-Age: 3600");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-    include_once '../../config/database.php';
-    include_once '../../modal/module.php';
 
-    
+    include_once '../../config/database.php';
+    include_once '../../modal/chapitre.php';
+
     $database = new Database();
     $db = $database->getConnection();
-    
-    $item = new Module($db);
-    
+
+    $item = new Chapitre($db);
+
     $data = json_decode(file_get_contents("php://input"));
-    
+
+    $item->nom = $data->nom;
     $item->id_module = $data->id_module;
     
-    // employee values
-    $item->id_specialite = $data->id_specialite;
-    $item->intitule = $data->intitule;
-    $item->semestre = $data->semestre;
-    $item->coefficient = $data->coefficient;
-    $item->credit= $data->credit;
+    
+   
     
     
-    if($item->updatemodule()){
-        echo json_encode("Employee data updated.");
+    if($item->createChapitre()){
+        echo 'Employee created successfully.';
     } else{
-        echo json_encode("Data could not be updated");
+        echo 'Employee could not be created.';
     }
 ?>

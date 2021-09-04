@@ -20,7 +20,7 @@
 
         // GET ALL
         public function getAffectation(){
-            $sqlQuery = "SELECT * FROM " . $this->db_table . "";
+            $sqlQuery = "SELECT * FROM " . $this->db_table . " affectation, enseignant enseignant, module module where affectation.id_enseignant=enseignant.id_enseignant and affectation.id_module=module.id_module order by affectation.id_enseignant";
             $stmt = $this->conn->prepare($sqlQuery);
             $stmt->execute();
             return $stmt;

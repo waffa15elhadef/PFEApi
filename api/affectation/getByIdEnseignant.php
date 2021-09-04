@@ -23,16 +23,31 @@
     if($itemCount > 0){
         
         $affectation = array();
-
+        $modules=array();
+        $affectation["modules"]=array();
+        $affectation["enseignant"]=array();
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             extract($row);
-            $e = array(
+            $enseignant = array(
                 "id_enseignant" => $id_enseignant,
-               "id_module" => $id_module
+                "nom"=>$nom,
+               "prenom"=>$prenom
             );
-
-            array_push($affectation, $e);
+            $affectation["enseignant"]=$enseignant;
+            
+            $module=array(
+                "id_module" => $id_module,
+                "intitule"=>$intitule,
+                "credit"=>$credit,
+                "semestre"=>$semestre,
+                "coefficient"=>$coefficient,
+            );
+            array_push($affectation["modules"],$module);
+           
+            // array_push($affectation["enseignant"], $modules);
         }
+
+        array_push($affectation["enseignant"], $enseignant);
         echo json_encode($affectation);
     }
 

@@ -5,27 +5,25 @@
     header("Access-Control-Max-Age: 3600");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
     include_once '../../config/database.php';
-    include_once '../../modal/module.php';
+    include_once '../../modal/utilisateur.php';
 
     
     $database = new Database();
     $db = $database->getConnection();
     
-    $item = new Module($db);
+    $item = new Utilisateur($db);
     
     $data = json_decode(file_get_contents("php://input"));
     
-    $item->id_module = $data->id_module;
+    $item->id_utilisateur = $data->id_utilisateur;
     
     // employee values
-    $item->id_specialite = $data->id_specialite;
-    $item->intitule = $data->intitule;
-    $item->semestre = $data->semestre;
-    $item->coefficient = $data->coefficient;
-    $item->credit= $data->credit;
+    $item->role = $data->role;
+    $item->username = $data->username;
+    $item->password = $data->password;
     
     
-    if($item->updatemodule()){
+    if($item->updateUtilisateur()){
         echo json_encode("Employee data updated.");
     } else{
         echo json_encode("Data could not be updated");

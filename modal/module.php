@@ -12,7 +12,7 @@
         // Columns
         public $id_module;
         public $id_specialite;
-        public $nom;
+        public $intitule;
         public $semestre;
         public $coefficient;
         public $credit;
@@ -37,7 +37,7 @@
             $sqlQuery = "INSERT INTO
             ". $this->db_table ." 
             SET
-            nom = :nom,
+            intitule = :intitule,
             semestre = :semestre,
             id_specialite = :id_specialite,
             coefficient = :coefficient ,
@@ -46,7 +46,7 @@
             $stmt = $this->conn->prepare($sqlQuery);
         
             // sanitize
-            $this->nom=htmlspecialchars(strip_tags($this->nom));
+            $this->intitule=htmlspecialchars(strip_tags($this->intitule));
             $this->id_specialite=htmlspecialchars(strip_tags($this->id_specialite));
             
             $this->semestre=htmlspecialchars(strip_tags($this->semestre));
@@ -54,7 +54,7 @@
             $this->credit=htmlspecialchars(strip_tags($this->credit));
             
             // bind data
-            $stmt->bindParam(":nom", $this->nom);
+            $stmt->bindParam(":intitule", $this->intitule);
             $stmt->bindParam(":id_specialite", $this->id_specialite);
             $stmt->bindParam(":semestre", $this->semestre);
             $stmt->bindParam(":coefficient", $this->coefficient);
@@ -87,14 +87,14 @@
             $this->credit = $dataRow['credit'];
             $this->semestre = $dataRow['semestre'];
             $this->coefficient = $dataRow['coefficient'];
-            $this->nom = $dataRow['nom'];
+            $this->intitule = $dataRow['intitule'];
             $this-> id_module= $dataRow['id_module']; 
             $this->specialite-> id_specialite= $dataRow['id_specialite']; 
             $this-> id_specialite= $dataRow['id_specialite']; 
          
                 $this-> specialite->filiere= $dataRow['filiere']; 
                 $this-> specialite->code= $dataRow['code']; 
-                $this-> specialite->nom= $dataRow['nom'];
+                $this-> specialite->intitule= $dataRow['intitule'];
            
                        
         }        
@@ -105,7 +105,7 @@
                         ". $this->db_table ."
                     SET
                     id_specialite = :id_specialite,
-                    nom = :nom,
+                    intitule = :intitule,
                     semestre = :semestre,
                     coefficient= :coefficient,
                     credit = :credit 
@@ -118,7 +118,7 @@
             $this->semestre=htmlspecialchars(strip_tags($this->semestre));
             $this->coefficient=htmlspecialchars(strip_tags($this->coefficient));
             $this->credit=htmlspecialchars(strip_tags($this->credit));
-            $this->nom=htmlspecialchars(strip_tags($this->nom));
+            $this->intitule=htmlspecialchars(strip_tags($this->intitule));
             $this->id_specialite=htmlspecialchars(strip_tags($this->id_specialite));
             $this->id_module=htmlspecialchars(strip_tags($this->id_module));
         
@@ -128,7 +128,7 @@
             $stmt->bindParam(":semestre", $this->semestre);
             $stmt->bindParam(":coefficient", $this->coefficient);
             $stmt->bindParam(":credit", $this->credit);
-            $stmt->bindParam(":nom", $this->nom);
+            $stmt->bindParam(":intitule", $this->intitule);
             $stmt->bindParam(":id_module", $this->id_module);
             $stmt->bindParam(":id_specialite", $this->id_specialite);
 

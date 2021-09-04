@@ -6,27 +6,22 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
     include_once '../../config/database.php';
-    include_once '../../modal/module.php';
+    include_once '../../modal/chapitre.php';
 
     $database = new Database();
     $db = $database->getConnection();
 
-    $item = new Module($db);
+    $item = new Chapitre($db);
 
-    $item->id_module = isset($_GET['id']) ? $_GET['id'] : die();
+    $item->id_chapitre = isset($_GET['id']) ? $_GET['id'] : die();
     $item->getById();
 
-    if($item->intitule != null){
+    if($item->nom != null){
         // create array
         $e = array(
-        
-            "id_module" => $item->id_module,
-            "id_specialite" => $item->id_specialite,
-            "intitule" => $item->intitule,
-            "semestre" => $item->semestre,
-            "coefficient" => $item->coefficient,
-            "credit" => $item->credit,
-            "specialite" => $item->specialite
+            "id_chapitre" => $item->id_chapitre,
+            "nom" => $item->nom,
+            "id_module" => $item->id_module
            
         );
         http_response_code(200);

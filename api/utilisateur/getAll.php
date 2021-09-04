@@ -3,40 +3,37 @@
     header("Content-Type: application/json; charset=UTF-8");
     
     include_once '../../config/database.php';
-    include_once '../../modal/module.php';
+    include_once '../../modal/utilisateur.php';
 
     
     $database = new Database();
     $db = $database->getConnection();
     
-    $item = new Module($db);
+    $item = new utilisateur($db);
 
 
-    $stmt = $item->getModules();
+    $stmt = $item->getUtilisateurs();
     $itemCount = $stmt->rowCount();
 
 
 
     if($itemCount > 0){
         
-        $modules = array();
-        $modules = array();
+        $utilisateurs = array();
+        $utilisateurs = array();
 
         while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
             extract($row);
             $e = array(
-                "id_module" => $id_module,
-                "id_specialite" => $id_specialite,
-                "intitule" => $intitule,
-                "semestre" => $semestre,
-                "coefficient" => $coefficient,
-                "credit" => $credit
-                
+                "id_utilisateur" => $id_utilisateur,
+                "username" => $username,
+                "password" => $password,
+                "role" => $role
             );
 
-            array_push($modules, $e);
+            array_push($utilisateurs, $e);
         }
-        echo json_encode($modules);
+        echo json_encode($utilisateurs);
     }
 
     else{
