@@ -16,7 +16,7 @@
 
       
     if($item->deleteEnseignant()){
-        echo json_encode("Employee deleted.");
+        echo json_encode("data deleted.");
     } else{
         echo json_encode("Data could not be deleted");
     }

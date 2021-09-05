@@ -25,8 +25,7 @@
             "prenom" => $item->prenom,
             "date_naissance" => $item->date_naissance,
             "lieu_naissance" => $item->lieu_naissance,
-            "username" => $item->username,
-            "mot_de_passe" => $item->mot_de_passe,
+        
             "telephone" => $item->telephone,
             "matricule" => $item->matricule
         );
@@ -37,6 +36,6 @@
       
     else{
         http_response_code(404);
-        echo json_encode("Employee not found.");
+        echo json_encode("data not found.");
     }
 ?>

@@ -1,11 +1,22 @@
 <?php
- header("Access-Control-Allow-Origin: *");
- header("Content-Type: application/json; charset=UTF-8");
- header("Access-Control-Allow-Methods: POST");
- header("Access-Control-Max-Age: 8400");
- header("Access-Control-Allow-Headers: Origin, Content-Type,Accept, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-    include_once '../../config/database.php';
-    include_once '../../modal/utilisateur.php';
+header("Access-Control-Allow-Origin: *");   
+header("Content-Type: application/json; charset=UTF-8");    
+header("Access-Control-Allow-Methods: POST");    
+header("Access-Control-Max-Age: 3600");    
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");  include_once '../../config/database.php';
+   
+
+if ($_SERVER['REQUEST_METHOD'] != 'POST') {    
+    return 0;    
+ }  
+else {
+  header("Access-Control-Allow-Origin: *");   
+header("Content-Type: application/json; charset=UTF-8");    
+header("Access-Control-Allow-Methods: POST");    
+header("Access-Control-Max-Age: 3600");    
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");  include_once '../../config/database.php';
+      
+include_once '../../modal/utilisateur.php';
 
     $database = new Database();
     $db = $database->getConnection();
@@ -32,7 +43,8 @@ $item->login();
       
     else{
         http_response_code(404);
-        echo json_encode("Employee not found.");
+        echo json_encode("data not found.");
     }
-    
+  
+}  
 ?>

@@ -27,11 +27,9 @@
     $item->lieu_naissance = $data->lieu_naissance;
 
     $item->telephone = $data->telephone;
-    $item->username = $data->username;
-    $item->mot_de_passe = $data->mot_de_passe;
-    
+  
     if($item->updateEnseignant()){
-        echo json_encode("Employee data updated.");
+        echo json_encode("data data updated.");
     } else{
         echo json_encode("Data could not be updated");
     }

@@ -1,7 +1,11 @@
 <?php
+if ($_SERVER['REQUEST_METHOD'] != 'GET') {    
+    return 0;    
+ }  
     header("Access-Control-Allow-Origin: *");
     header("Content-Type: application/json; charset=UTF-8");
-    
+    header("Access-Control-Allow-Methods: GET");
+    header("Access-Control-Max-Age: 3600");
     include_once '../../config/database.php';
     include_once '../../modal/enseignant.php';
 
@@ -32,9 +36,7 @@
                 "date_naissance" => $date_naissance,
                 "lieu_naissance" => $lieu_naissance,
                 "telephone" => $telephone,
-                "matricule" => $matricule,
-                "username" => $username,
-                "mot_de_passe" => $mot_de_passe
+                "matricule" => $matricule
             );
 
             array_push($enseignants, $e);

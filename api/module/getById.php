@@ -35,6 +35,6 @@
       
     else{
         http_response_code(404);
-        echo json_encode("Employee not found.");
+        echo json_encode("data not found.");
     }
 ?>

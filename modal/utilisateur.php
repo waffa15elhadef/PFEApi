@@ -45,12 +45,10 @@
             $stmt->bindParam(":username", $this->username);
             $stmt->bindParam(":password", $this->password);
             $stmt->bindParam(":role", $this->role);
-         
-            
-            if($stmt->execute()){
-               return true;
-            }
-            return false;
+            if( $stmt->execute()){
+                return $this->conn->lastInsertId();
+            };
+
         }
 
         // READ single
