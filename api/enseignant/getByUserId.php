@@ -13,8 +13,8 @@
 
     $item = new Enseignant($db);
 
-    $item->id_enseignant = isset($_GET['id']) ? $_GET['id'] : die();
-    $item->getById();
+    $item->id_utilisateur = isset($_GET['id']) ? $_GET['id'] : die();
+    $item->getByUserId();
 
     if($item->nom != null){
         // create array
@@ -25,7 +25,7 @@
             "prenom" => $item->prenom,
             "date_naissance" => $item->date_naissance,
             "lieu_naissance" => $item->lieu_naissance,
-        "id_utilisateur"=>$item->id_utilisateur,
+           "id_utilisateur"=>$item->id_utilisateur,
             "telephone" => $item->telephone,
             "matricule" => $item->matricule
         );

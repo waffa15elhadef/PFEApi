@@ -102,7 +102,35 @@
             $this->lieu_naissance = $dataRow['lieu_naissance'];
             $this->date_naissance = $dataRow['date_naissance'];
        
-        }        
+        }
+        
+          // READ single
+          public function getByUserId(){
+            $sqlQuery = "SELECT * FROM
+                        ". $this->db_table ."
+                    WHERE 
+                    id_utilisateur = ?
+                    LIMIT 0,1";
+
+            $stmt = $this->conn->prepare($sqlQuery);
+
+            $stmt->bindParam(1, $this->id_utilisateur);
+
+            $stmt->execute();
+
+            $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            $this->id_enseignant = $dataRow['id_enseignant'];
+            $this->nom = $dataRow['nom'];
+            $this->prenom = $dataRow['prenom'];
+            $this->email = $dataRow['email'];
+            $this->telephone = $dataRow['telephone'];
+            $this->matricule = $dataRow['matricule'];
+            $this->id_utilisateur = $dataRow['id_utilisateur'];
+            $this->lieu_naissance = $dataRow['lieu_naissance'];
+            $this->date_naissance = $dataRow['date_naissance'];
+       
+        }
 
         // UPDATE
         public function updateEnseignant(){

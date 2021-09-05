@@ -6,28 +6,23 @@
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
     include_once '../../config/database.php';
-    include_once '../../modal/enseignant.php';
+     include_once '../../modal/utilisateur.php';
 
+    
     $database = new Database();
     $db = $database->getConnection();
 
-    $item = new Enseignant($db);
+    $item = new Utilisateur($db);
 
-    $item->id_enseignant = isset($_GET['id']) ? $_GET['id'] : die();
+    $item->id_utilisateur = isset($_GET['id']) ? $_GET['id'] : die();
     $item->getById();
 
-    if($item->nom != null){
+    if($item->id_utilisateur != null){
         // create array
         $emp_arr = array(
-            "id_enseignant" =>  $item->id_enseignant,
-            "nom" => $item->nom,
-            "email" => $item->email,
-            "prenom" => $item->prenom,
-            "date_naissance" => $item->date_naissance,
-            "lieu_naissance" => $item->lieu_naissance,
-        "id_utilisateur"=>$item->id_utilisateur,
-            "telephone" => $item->telephone,
-            "matricule" => $item->matricule
+            "username" =>  $item->username,
+            "password" => $item->password,
+        "id_utilisateur"=>$item->id_utilisateur
         );
       
         http_response_code(200);
