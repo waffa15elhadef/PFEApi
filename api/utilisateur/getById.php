@@ -20,8 +20,8 @@
     if($item->id_utilisateur != null){
         // create array
         $emp_arr = array(
-            "username" =>  $item->username,
-            "password" => $item->password,
+            "nom_d_utilisateur" =>  $item->nom_d_utilisateur,
+            "mot_de_passe" => $item->mot_de_passe,
         "id_utilisateur"=>$item->id_utilisateur
         );
       

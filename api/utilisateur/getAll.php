@@ -26,8 +26,8 @@
             extract($row);
             $e = array(
                 "id_utilisateur" => $id_utilisateur,
-                "username" => $username,
-                "password" => $password,
+                "nom_d_utilisateur" => $nom_d_utilisateur,
+                "mot_de_passe" => $mot_de_passe,
                 "role" => $role
             );
 

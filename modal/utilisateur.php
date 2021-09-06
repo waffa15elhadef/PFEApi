@@ -9,8 +9,8 @@
 
         // Columns
         public $id_utilisateur;
-        public $username;
-        public $password;
+        public $nom_d_utilisateur;
+        public $mot_de_passe;
         public $role;      
         // Db connection
         public function __construct($db){
@@ -31,20 +31,20 @@
             $sqlQuery = "INSERT INTO
             ". $this->db_table ." 
             SET
-            nom_d_utilisateur= :username,
-            mot_de_passe = :password,
+            nom_d_utilisateur= :nom_d_utilisateur,
+            mot_de_passe = :mot_de_passe,
             role= :role
        
             ";
             $stmt = $this->conn->prepare($sqlQuery);
         
             // sanitize
-            $this->username=htmlspecialchars(strip_tags($this->username));
-            $this->password=htmlspecialchars(strip_tags($this->password));
+            $this->nom_d_utilisateur=htmlspecialchars(strip_tags($this->nom_d_utilisateur));
+            $this->mot_de_passe=htmlspecialchars(strip_tags($this->mot_de_passe));
             $this->role=htmlspecialchars(strip_tags($this->role));
             // bind data
-            $stmt->bindParam(":username", $this->username);
-            $stmt->bindParam(":password", $this->password);
+            $stmt->bindParam(":nom_d_utilisateur", $this->nom_d_utilisateur);
+            $stmt->bindParam(":mot_de_passe", $this->mot_de_passe);
             $stmt->bindParam(":role", $this->role);
             if( $stmt->execute()){
                 return $this->conn->lastInsertId();
@@ -57,13 +57,13 @@
             $sqlQuery = "SELECT * FROM
                         ". $this->db_table ."
                     WHERE 
-                    username = :username 
-                    and password= :password
+                    nom_d_utilisateur = :nom_d_utilisateur 
+                    and mot_de_passe= :mot_de_passe
                     ";
             $stmt = $this->conn->prepare($sqlQuery);
 
-            $stmt->bindParam(":username", $this->username);
-            $stmt->bindParam(":password", $this->password);
+            $stmt->bindParam(":nom_d_utilisateur", $this->nom_d_utilisateur);
+            $stmt->bindParam(":mot_de_passe", $this->mot_de_passe);
 
             $stmt->execute();
 
@@ -71,13 +71,13 @@
             $count = $stmt->rowCount();
          
             if(!empty($dataRow)&&$count == 1 ){
-                $this->username= $dataRow['username'];
-                $this->password= $dataRow['password'];
+                $this->nom_d_utilisateur= $dataRow['nom_d_utilisateur'];
+                $this->mot_de_passe= $dataRow['mot_de_passe'];
                 $this->role= $dataRow['role'];
                 $this->id_utilisateur= $dataRow['id_utilisateur'];
             }else{
-                $this->username=null;
-                $this->password=null;
+                $this->nom_d_utilisateur=null;
+                $this->mot_de_passe=null;
                 $this->role=null;
             }            
         }        
@@ -87,8 +87,8 @@
             $sqlQuery = "UPDATE
                         ". $this->db_table ."
                     SET
-                    username = :username,
-                    password= :password,
+                    nom_d_utilisateur = :nom_d_utilisateur,
+                    mot_de_passe= :mot_de_passe,
                     role = :role
                     
                       
@@ -99,13 +99,13 @@
             //serialize
          
             $this->id_utilisateur=htmlspecialchars(strip_tags($this->id_utilisateur));
-            $this->username=htmlspecialchars(strip_tags($this->username));
-            $this->password=htmlspecialchars(strip_tags($this->password));
+            $this->nom_d_utilisateur=htmlspecialchars(strip_tags($this->nom_d_utilisateur));
+            $this->mot_de_passe=htmlspecialchars(strip_tags($this->mot_de_passe));
             $this->role=htmlspecialchars(strip_tags($this->role));
         
             // bind data
-            $stmt->bindParam(":password", $this->password);
-            $stmt->bindParam(":username", $this->username);         
+            $stmt->bindParam(":mot_de_passe", $this->mot_de_passe);
+            $stmt->bindParam(":nom_d_utilisateur", $this->nom_d_utilisateur);         
             $stmt->bindParam(":id_utilisateur", $this->id_utilisateur);         
             $stmt->bindParam(":role", $this->role);
         
@@ -150,8 +150,8 @@
             $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
             
             $this->id_utilisateur = $dataRow['id_utilisateur'];
-            $this->username = $dataRow['username'];
-            $this->password = $dataRow['password'];
+            $this->nom_d_utilisateur = $dataRow['nom_d_utilisateur'];
+            $this->mot_de_passe = $dataRow['mot_de_passe'];
           
             
         } 

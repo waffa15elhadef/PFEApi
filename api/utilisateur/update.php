@@ -19,8 +19,8 @@
     
     // employee values
     $item->role = $data->role;
-    $item->username = $data->username;
-    $item->password = $data->password;
+    $item->nom_d_utilisateur = $data->nom_d_utilisateur;
+    $item->mot_de_passe = $data->mot_de_passe;
     
     
     if($item->updateUtilisateur()){

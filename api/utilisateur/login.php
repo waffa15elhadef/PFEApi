@@ -26,16 +26,16 @@ include_once '../../modal/utilisateur.php';
 
     $data = json_decode(file_get_contents("php://input"));
 
-    $item->username= $data->username;
-    $item->password= $data->password;
+    $item->nom_d_utilisateur= $data->nom_d_utilisateur;
+    $item->mot_de_passe= $data->mot_de_passe;
 $item->login();
-    if($item->username != null){ 
+    if($item->nom_d_utilisateur != null){ 
         // create array 
         $e = array(
         
             "id_utilisateur" => $item->id_utilisateur,
-            "username" => $item->username,
-            "password" => $item->password,
+            "nom_d_utilisateur" => $item->nom_d_utilisateur,
+            "mot_de_passe" => $item->mot_de_passe,
             "role" => $item->role
         );
         http_response_code(200);
