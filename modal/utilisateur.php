@@ -31,8 +31,8 @@
             $sqlQuery = "INSERT INTO
             ". $this->db_table ." 
             SET
-            username= :username,
-            password = :password,
+            nom_d_utilisateur= :username,
+            mot_de_passe = :password,
             role= :role
        
             ";

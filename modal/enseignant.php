@@ -15,7 +15,7 @@
         public $date_naissance;
         public $lieu_naissance;
         public $email;
-        public $telephoe;
+        public $telephone;
         public $id_utilisateur;
 
         // Db connection
