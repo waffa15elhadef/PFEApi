@@ -156,5 +156,17 @@
             return false;
         }
 
+      // GET ALL
+      public function getModulesParSpecialite(){
+        $sqlQuery = "SELECT * FROM " . $this->db_table . " where id_specialite = :id_specialite";
+        $stmt = $this->conn->prepare($sqlQuery);
+
+        $this->id_specialite=htmlspecialchars(strip_tags($this->id_specialite));
+        $stmt->bindParam(":id_specialite", $this->id_specialite);
+
+    
+        $stmt->execute();
+        return $stmt;
+    }
     }
 ?>

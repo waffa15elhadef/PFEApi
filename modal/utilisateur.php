@@ -25,6 +25,7 @@
             return $stmt;
         }
 
+
         // CREATE
         public function createUtilisateur(){
             $sqlQuery = "INSERT INTO
@@ -45,12 +46,10 @@
             $stmt->bindParam(":username", $this->username);
             $stmt->bindParam(":password", $this->password);
             $stmt->bindParam(":role", $this->role);
-         
-            
-            if($stmt->execute()){
-               return true;
-            }
-            return false;
+            if( $stmt->execute()){
+                return $this->conn->lastInsertId();
+            };
+
         }
 
         // READ single
@@ -132,6 +131,30 @@
         }
         
 
+        //GEt bu ID
+
+         // READ single
+         public function getById(){
+            $sqlQuery = "SELECT * FROM
+                        ". $this->db_table ."
+                    WHERE 
+                    id_utilisateur = ?
+                    LIMIT 0,1";
+
+            $stmt = $this->conn->prepare($sqlQuery);
+
+            $stmt->bindParam(1, $this->id_utilisateur);
+
+            $stmt->execute();
+
+            $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            $this->id_utilisateur = $dataRow['id_utilisateur'];
+            $this->username = $dataRow['username'];
+            $this->password = $dataRow['password'];
+          
+            
+        } 
 
     }
 ?>

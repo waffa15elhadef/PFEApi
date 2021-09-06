@@ -26,7 +26,7 @@
     
     
     if($item->updatemodule()){
-        echo json_encode("Employee data updated.");
+        echo json_encode("data data updated.");
     } else{
         echo json_encode("Data could not be updated");
     }

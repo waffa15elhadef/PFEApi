@@ -16,8 +16,7 @@
         public $lieu_naissance;
         public $email;
         public $telephoe;
-        public $username;
-        public $mot_de_passe;
+        public $id_utilisateur;
 
         // Db connection
         public function __construct($db){
@@ -44,12 +43,11 @@
             lieu_naissance = :lieu_naissance, 
             email = :email, 
             telephone = :telephone, 
-            username = :username,
-            mot_de_passe = :mot_de_passe
+            id_utilisateur = :id_utilisateur
             ";
 
             $stmt = $this->conn->prepare($sqlQuery);
-        
+       // echo $this->toString();
             // sanitize
             $this->nom=htmlspecialchars(strip_tags($this->nom));
             $this->prenom=htmlspecialchars(strip_tags($this->prenom));
@@ -58,8 +56,7 @@
             $this->lieu_naissance=htmlspecialchars(strip_tags($this->lieu_naissance));
             $this->email=htmlspecialchars(strip_tags($this->email));
             $this->telephone=htmlspecialchars(strip_tags($this->telephone));
-            $this->username=htmlspecialchars(strip_tags($this->username));
-            $this->mot_de_passe=htmlspecialchars(strip_tags($this->mot_de_passe));
+            $this->id_utilisateur=htmlspecialchars(strip_tags($this->id_utilisateur));
          
             // bind data
             $stmt->bindParam(":nom", $this->nom);
@@ -69,14 +66,15 @@
             $stmt->bindParam(":lieu_naissance", $this->lieu_naissance);
             $stmt->bindParam(":email", $this->email);
             $stmt->bindParam(":telephone", $this->telephone);
-            $stmt->bindParam(":username", $this->username);
-            $stmt->bindParam(":mot_de_passe", $this->mot_de_passe);
+            $stmt->bindParam(":id_utilisateur", $this->id_utilisateur);
     
             
             if($stmt->execute()){
                return true;
+            }else{
+                print_r($stmt->errorInfo());
+
             }
-            return false;
         }
 
         // READ single
@@ -100,12 +98,39 @@
             $this->email = $dataRow['email'];
             $this->telephone = $dataRow['telephone'];
             $this->matricule = $dataRow['matricule'];
-            $this->username = $dataRow['username'];
-            $this->mot_de_passe = $dataRow['mot_de_passe'];
+            $this->id_utilisateur = $dataRow['id_utilisateur'];
             $this->lieu_naissance = $dataRow['lieu_naissance'];
             $this->date_naissance = $dataRow['date_naissance'];
        
-        }        
+        }
+        
+          // READ single
+          public function getByUserId(){
+            $sqlQuery = "SELECT * FROM
+                        ". $this->db_table ."
+                    WHERE 
+                    id_utilisateur = ?
+                    LIMIT 0,1";
+
+            $stmt = $this->conn->prepare($sqlQuery);
+
+            $stmt->bindParam(1, $this->id_utilisateur);
+
+            $stmt->execute();
+
+            $dataRow = $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            $this->id_enseignant = $dataRow['id_enseignant'];
+            $this->nom = $dataRow['nom'];
+            $this->prenom = $dataRow['prenom'];
+            $this->email = $dataRow['email'];
+            $this->telephone = $dataRow['telephone'];
+            $this->matricule = $dataRow['matricule'];
+            $this->id_utilisateur = $dataRow['id_utilisateur'];
+            $this->lieu_naissance = $dataRow['lieu_naissance'];
+            $this->date_naissance = $dataRow['date_naissance'];
+       
+        }
 
         // UPDATE
         public function updateEnseignant(){
@@ -119,8 +144,6 @@
                     lieu_naissance = :lieu_naissance, 
                     email = :email, 
                     telephone = :telephone, 
-                    username = :username,
-                    mot_de_passe = :mot_de_passe      
                     WHERE 
                     id_enseignant = :id_enseignant";
         
@@ -133,8 +156,6 @@
             $this->lieu_naissance=htmlspecialchars(strip_tags($this->lieu_naissance));
             $this->email=htmlspecialchars(strip_tags($this->email));
             $this->telephone=htmlspecialchars(strip_tags($this->telephone));
-            $this->username=htmlspecialchars(strip_tags($this->username));
-            $this->mot_de_passe=htmlspecialchars(strip_tags($this->mot_de_passe));
          
             // bind data
             $stmt->bindParam(":nom", $this->nom);
@@ -144,8 +165,6 @@
             $stmt->bindParam(":lieu_naissance", $this->lieu_naissance);
             $stmt->bindParam(":email", $this->email);
             $stmt->bindParam(":telephone", $this->telephone);
-            $stmt->bindParam(":username", $this->username);
-            $stmt->bindParam(":mot_de_passe", $this->mot_de_passe);
              $stmt->bindParam(":id_enseignant", $this->id_enseignant);
         
             if($stmt->execute()){
@@ -167,6 +186,21 @@
                 return true;
             }
             return false;
+        }
+
+        function toString() {
+            return 		
+            " ".$this->nom 			 .
+            ",".$this->prenom 		 .
+            ",".$this->email  		 .
+            ",".$this->telephone	 .
+            ",".$this->matricule	 .
+            ",".$this->id_utilisateur.
+            ",".$this->lieu_naissance.
+            ",".$this->date_naissance;
+		
+		
+		
         }
 
     }

@@ -20,10 +20,6 @@
     $item->password= $data->password;
    
 
-    
-    if($item->createUtilisateur()){
-        echo 'Employee created successfully.';
-    } else{
-        echo 'Employee could not be created.';
-    }
+    $res=$item->createUtilisateur();
+   echo $res;
 ?>
