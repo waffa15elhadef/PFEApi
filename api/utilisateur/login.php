@@ -1,11 +1,14 @@
 <?php
- header("Access-Control-Allow-Origin: *");
- header("Content-Type: application/json; charset=UTF-8");
- header("Access-Control-Allow-Methods: POST");
- header("Access-Control-Max-Age: 8400");
- header("Access-Control-Allow-Headers: Origin, Content-Type,Accept, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-    include_once '../../config/database.php';
-    include_once '../../modal/utilisateur.php';
+if ($_SERVER['REQUEST_METHOD'] != 'POST') {    
+    return 0;    
+ }  
+header("Access-Control-Allow-Origin: *");   
+header("Content-Type: application/json; charset=UTF-8");    
+header("Access-Control-Allow-Methods: POST, DELETE, OPTIONS");    
+header("Access-Control-Max-Age: 3600");    
+header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");  include_once '../../config/database.php';
+      
+include_once '../../modal/utilisateur.php';
 
     $database = new Database();
     $db = $database->getConnection();
